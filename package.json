@@ -1,0 +1,17 @@
+{
+  "name": "card-suite-typescript",
+  "version": "1.0.0",
+  "description": "A casino-style card game suite built with TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "serve": "npx http-server dist -p 8080"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.0"
+  },
+  "keywords": ["card", "game", "typescript"],
+  "author": "",
+  "license": "MIT"
+}
