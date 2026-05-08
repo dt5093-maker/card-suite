@@ -1,36 +1,58 @@
-# Unity Card Suite App
+# Card Suite TypeScript Web App
 
-This workspace contains the C# Unity implementation of a casino-style card suite game.
+A web-based casino-style card game suite built with TypeScript, Canvas, and vanilla HTML.
 
-## Included Scripts
-- `Assets/Scripts/CardData.cs`
-- `Assets/Scripts/Deck.cs`
-- `Assets/Scripts/CardUIFactory.cs`
-- `Assets/Scripts/CardGameManager.cs`
+## Included Source Files
+- `src/Card.ts` - Card and Suit/Rank enums
+- `src/Deck.ts` - Deck management and shuffling
+- `src/CardRenderer.ts` - Canvas-based card rendering
+- `src/CardGameManager.ts` - Game logic for High Card, War, and Blackjack
+- `src/index.ts` - Entry point and initialization
 
 ## Features
-- High Card
-- War
-- Blackjack
+- **High Card** - Draw one card each, higher card wins
+- **War** - Each round, higher card wins. On tie, draw tiebreaker.
+- **Blackjack** - Get closest to 21 without busting
 - Green casino table-style UI
-- Visual card rendering using Unity UI
+- Canvas-based visual card rendering
 - Deck shuffle, reset, and score tracking
 
-## Setup in Unity
-1. Open Unity Hub and create a new 2D project.
-2. Copy this workspace into the Unity project folder or open this folder as the Unity project.
-3. Create a `Canvas` and add UI elements:
-   - `Dropdown` for game mode selection
-   - `Buttons` for Play, Reset, Shuffle, Hit, Stand, and Close
-   - `Text` objects for status, score, and Blackjack totals
-   - `Empty GameObjects` for `PlayerCardArea`, `ComputerCardArea`, `BlackjackPlayerArea`, and `BlackjackDealerArea`
-4. Create an empty `GameObject` named `CardGameManager`.
-5. Attach the `CardGameManager` script to it.
-7. If you do not wire UI references manually, the script will build the Canvas and all needed UI elements at runtime.
-8. Save the scene and press Play.
+## Build & Run
+
+### Setup
+```bash
+npm install
+```
+
+### Development
+```bash
+npm run dev
+```
+
+### Build
+```bash
+npm run build
+```
+
+### Serve
+```bash
+npm run serve
+```
+
+Then open `http://localhost:8080` in your browser.
+
+## Project Structure
+```
+card-studio/
+├── src/                 # TypeScript source files
+├── dist/                # Compiled JavaScript and HTML
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
 ## Notes
-- `CardUIFactory` generates card visuals at runtime, so no external art is required.
-- `CardGameManager` now also creates the UI automatically if the controls are not already assigned.
-- The game logic is implemented entirely in C# for Unity.
-- You can improve the visuals later by adding sprite-based card art and animated transitions.
+- Built with vanilla TypeScript (no frameworks)
+- Uses HTML5 Canvas for card rendering
+- Fully responsive green casino styling
+- No external dependencies (except TypeScript compiler)
