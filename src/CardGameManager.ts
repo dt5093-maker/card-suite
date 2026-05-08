@@ -260,33 +260,55 @@ export class CardGameManager {
   }
 
   private drawGameState(playerCard: Card, computerCard: Card): void {
-    this.ctx.fillStyle = "#0b3d0b";
+    this.ctx.fillStyle = "#051a07";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.fillStyle = "#0a6a2e";
-    this.ctx.fillRect(10, 10, this.canvas.width - 20, this.canvas.height - 20);
+    const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+    gradient.addColorStop(0, "#0a3d14");
+    gradient.addColorStop(0.5, "#051a07");
+    gradient.addColorStop(1, "#0a3d14");
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.fillStyle = "white";
-    this.ctx.font = "bold 18px Arial";
+    this.ctx.strokeStyle = "rgba(31, 207, 94, 0.2)";
+    this.ctx.lineWidth = 1;
+    this.ctx.strokeRect(20, 20, this.canvas.width - 40, this.canvas.height - 40);
+
+    this.ctx.fillStyle = "#1fcf5e";
+    this.ctx.font = "bold 18px 'Poppins', Arial";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("Player", this.canvas.width / 4, 40);
-    this.ctx.fillText("Computer", (3 * this.canvas.width) / 4, 40);
+    this.ctx.textBaseline = "top";
+    this.ctx.fillText("PLAYER", this.canvas.width / 4, 30);
+    this.ctx.fillText("COMPUTER", (3 * this.canvas.width) / 4, 30);
 
-    CardRenderer.drawCard(this.ctx, playerCard, this.canvas.width / 4 - 60, 80, 120, 170);
-    CardRenderer.drawCard(this.ctx, computerCard, (3 * this.canvas.width) / 4 - 60, 80, 120, 170);
+    const cardY = 90;
+    const playerCardX = this.canvas.width / 4 - 65;
+    const computerCardX = (3 * this.canvas.width) / 4 - 65;
+
+    CardRenderer.drawCard(this.ctx, playerCard, playerCardX, cardY, 130, 180);
+    CardRenderer.drawCard(this.ctx, computerCard, computerCardX, cardY, 130, 180);
   }
 
   private render(): void {
-    this.ctx.fillStyle = "#0b3d0b";
+    this.ctx.fillStyle = "#051a07";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.fillStyle = "#0a6a2e";
-    this.ctx.fillRect(10, 10, this.canvas.width - 20, this.canvas.height - 20);
+    const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
+    gradient.addColorStop(0, "#0a3d14");
+    gradient.addColorStop(0.5, "#051a07");
+    gradient.addColorStop(1, "#0a3d14");
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.ctx.fillStyle = "white";
-    this.ctx.font = "24px Arial";
+    this.ctx.strokeStyle = "rgba(31, 207, 94, 0.2)";
+    this.ctx.lineWidth = 1;
+    this.ctx.strokeRect(20, 20, this.canvas.width - 40, this.canvas.height - 40);
+
+    this.ctx.fillStyle = "#1fcf5e";
+    this.ctx.font = "bold 24px 'Playfair Display', Arial";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("Card Suite Games", this.canvas.width / 2, 50);
+    this.ctx.textBaseline = "middle";
+    this.ctx.fillText("Card Suite", this.canvas.width / 2, this.canvas.height / 2);
   }
 
   private updateStatus(message: string): void {
@@ -295,8 +317,15 @@ export class CardGameManager {
   }
 
   private updateScore(): void {
-    const el = document.getElementById("score") as HTMLDivElement;
-    if (el) el.textContent = `Rounds: ${this.roundsPlayed} | Player: ${this.playerScore} | Computer: ${this.computerScore} | Cards: ${this.deck.getCardsLeft()}`;
+    const playerEl = document.getElementById("playerScore") as HTMLDivElement;
+    const computerEl = document.getElementById("computerScore") as HTMLDivElement;
+    const roundsEl = document.getElementById("roundsScore") as HTMLDivElement;
+    const cardsEl = document.getElementById("cardsLeft") as HTMLDivElement;
+
+    if (playerEl) playerEl.textContent = this.playerScore.toString();
+    if (computerEl) computerEl.textContent = this.computerScore.toString();
+    if (roundsEl) roundsEl.textContent = this.roundsPlayed.toString();
+    if (cardsEl) cardsEl.textContent = this.deck.getCardsLeft().toString();
   }
 
   private updateRules(): void {
